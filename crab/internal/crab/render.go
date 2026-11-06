@@ -80,7 +80,7 @@ func (r row) limb(ax, ay, bx, by, width int, c Color) {
 
 // RenderRow writes big-endian RGB565 pixels for [x, x+len(dst)/2).
 // Claw regions are x=58..177 and x=288..407, y=102..221 (even aligned).
-func RenderRow(dst []byte, x, y, left, right int) {
+func RenderRow(dst []byte, x, y, left, right, mouth int) {
 	r := row{y, x, dst}
 	r.span(x, x+len(dst)/2-1, background)
 	r.ellipse(233, 233, 211, 211, sea)
@@ -125,8 +125,17 @@ func RenderRow(dst []byte, x, y, left, right int) {
 	}
 	r.ellipse(192, 278, 11, 6, lightRed)
 	r.ellipse(274, 278, 11, 6, lightRed)
-	r.ellipse(233, 282, 16, 14, ink)
-	r.ellipse(233, 276, 18, 11, red)
+	mouth = max(0, min(MaxMouth, mouth))
+	if mouth == 0 {
+		r.ellipse(233, 282, 16, 14, ink)
+		r.ellipse(233, 276, 18, 11, red)
+	} else {
+		ry := 4 + mouth*2
+		r.ellipse(233, 286, 16, ry, ink)
+		if mouth >= 4 {
+			r.ellipse(233, 286+ry-5, 8, 3, lightRed)
+		}
+	}
 	// Button color hints, kept inside the circular screen.
 	r.ellipse(180, 377, 7, 7, RGB(255, 208, 68))
 	r.ellipse(286, 377, 7, 7, RGB(84, 175, 255))

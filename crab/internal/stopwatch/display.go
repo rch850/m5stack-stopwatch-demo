@@ -88,7 +88,7 @@ func (d *Display) command(cmd byte, args ...byte) {
 }
 
 // Draw updates an even-aligned rectangle. It streams one scanline at a time.
-func (d *Display) Draw(x, y, w, h, left, right int) {
+func (d *Display) Draw(x, y, w, h, left, right, mouth int) {
 	// M5GFX uses a six-column controller offset for the StopWatch panel.
 	xs, xe := x+6, x+w-1+6
 	d.command(0x2a, byte(xs>>8), byte(xs), byte(xe>>8), byte(xe))
@@ -99,7 +99,7 @@ func (d *Display) Draw(x, y, w, h, left, right int) {
 	}
 	for yy := y; yy < y+h; yy++ {
 		line := d.line[:w*2]
-		crab.RenderRow(line, x, yy, left, right)
+		crab.RenderRow(line, x, yy, left, right, mouth)
 		for _, b := range line {
 			d.clear.Set(clockMask | dataMask)
 			d.set.Set(d.quad[b>>4])

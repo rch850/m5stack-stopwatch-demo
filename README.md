@@ -4,7 +4,7 @@ M5Stack StopWatch 向けの TinyGo デモ集です。各デモのディレクト
 
 | ディレクトリ | デモ |
 | --- | --- |
-| [crab/](crab/README.md) | 左右のボタンでカニのハサミを開閉 |
+| [crab/](crab/README.md) | 左右のボタンでハサミを開閉し、マイクの音量に応じて口を動かすカニ |
 
 ```sh
 cd crab

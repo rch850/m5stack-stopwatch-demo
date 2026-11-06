@@ -21,9 +21,9 @@ func TestIndependentClawsAndDirtyRegions(t *testing.T) {
 	base, left, right := make([]byte, Size*2), make([]byte, Size*2), make([]byte, Size*2)
 	changedLeft, changedRight := false, false
 	for y := 0; y < Size; y++ {
-		RenderRow(base, 0, y, 0, 0)
-		RenderRow(left, 0, y, 4, 0)
-		RenderRow(right, 0, y, 0, 4)
+		RenderRow(base, 0, y, 0, 0, 0)
+		RenderRow(left, 0, y, 4, 0, 0)
+		RenderRow(right, 0, y, 0, 4, 0)
 		for x := 0; x < Size; x++ {
 			for side, line := range [][]byte{left, right} {
 				if bytes.Equal(base[x*2:x*2+2], line[x*2:x*2+2]) {
