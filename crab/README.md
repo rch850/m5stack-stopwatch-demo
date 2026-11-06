@@ -10,6 +10,8 @@ M5Stack **StopWatch (C152 / ESP32-S3)** にカニを表示する TinyGo アプ�
 
 ![カニの動作プレビュー](docs/crab.gif)
 
+[実機での動作動画を見る（X）](https://x.com/rch850/status/2118732882000986221)
+
 ## ビルド
 
 [TinyGo](https://tinygo.org/getting-started/install/) と Go をインストールして実行します。
