@@ -14,11 +14,13 @@ func main() {
 	leftPin.Configure(machine.PinConfig{Mode: machine.PinInputPullup})
 	rightPin.Configure(machine.PinConfig{Mode: machine.PinInputPullup})
 	var display stopwatch.Display
-	if err := display.Init(); err != nil {
-		for {
-			println("StopWatch display/power initialization failed:", err.Error())
-			time.Sleep(time.Second)
+	for {
+		if err := display.Init(); err != nil {
+			println("StopWatch display/power initialization failed; retrying:", err.Error())
+			time.Sleep(500 * time.Millisecond)
+			continue
 		}
+		break
 	}
 	display.Draw(0, 0, crab.Size, crab.Size, 0, 0, 0)
 	// Audio capture runs separately so waiting for DMA never blocks the buttons.
